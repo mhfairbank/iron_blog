@@ -1,0 +1,13 @@
+<h3>These are your blog entries.</h3>
+<section class="row">
+  <div class="col-xs-4">
+    <ul>
+      {{#each entry in controller}}
+        <li>{{#link-to 'entry' entry}}{{entry.title}}{{/link-to}}</li>
+      {{/each}}
+    </ul> 
+  </div>
+  <div class="col-xs-8">
+    {{outlet}}
+  </div>
+</section>
