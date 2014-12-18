@@ -15,11 +15,86 @@ IronBlog.EntriesRoute = Ember.Route.extend({
   }
 })
 
+IronBlog.EntryController = Ember.ObjectController.extend({
+  editing: false,
+  actions: {
+    startEdit: function(){
+      this.set('editing', true)
+    },
+    saveEntry: function(){
+      var entry = this.get('model');
+      var controller = this;
+      entry.save().then(function(){
+        controller.set('editing', false)
+      })
+    },
+    deleteEntry: function(){
+      var entry = this.get('model');
+      var controller = this;
+      entry.destroyRecord().then(function(){
+        controller.transitionToRoute('entries')
+      })
+    }
+  }
+})
+
 IronBlog.EntriesController = Ember.ArrayController.extend({
   entriesCount: function(){
     return this.get('model.length');
   }.property('model.length')
 })
+
+IronBlog.EntriesIndexController = Ember.ArrayController.extend({
+  newTitle: '',
+  newBody: '',
+  levelOfRage: '',
+
+  actions: {
+    createEntry: function(){
+      var title = this.get('newTitle');
+      var body = this.get('newBody');
+      var rage = this.get('levelOfRage');
+
+      var entry = this.store.createRecord('entry', {
+        title: title,
+        body: body,
+        levelOfRage: rage
+      });
+
+      var controller = this;
+      entry.save().then(function(model){
+        controller.set('newTitle', '');
+        controller.set('newBody', '');
+        controller.set('levelOfRage', '');
+        controller.transitionToRoute('entry', model)
+      });
+    }
+  }
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // IronBlog.EntriesRoute = Ember.Route.extend({
 //   model: function(){

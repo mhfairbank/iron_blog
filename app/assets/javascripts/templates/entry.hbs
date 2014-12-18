@@ -1,4 +1,13 @@
+<button class='btn btn-danger' {{action 'deleteEntry'}}>Delete Entry</button>
+{{#if editing}}
+  <button class='btn btn-success' {{action 'saveEntry'}}>Save Entry</button>
+  {{input class="form-control" valueBinding="title"}}
+  {{textarea class="form-control" valueBinding="body"}}
+  {{input class="form-control" valueBinding="levelOfRage"}}
+{{else}}
+<button class='btn btn-success' {{action 'startEdit'}}>Edit</button>
 <h4>{{title}}</h4>
 <p>
   {{body}}
 </p>
+{{/if}}
