@@ -2,6 +2,7 @@
 <section class="row">
   <div class="col-xs-4">
     <ul>
+    Entries Count: {{entriesCount}}
       {{#each entry in controller}}
         <li>{{#link-to 'entry' entry}}{{entry.title}}{{/link-to}}</li>
       {{/each}}

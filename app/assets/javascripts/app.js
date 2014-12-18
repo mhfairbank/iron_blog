@@ -15,6 +15,12 @@ IronBlog.EntriesRoute = Ember.Route.extend({
   }
 })
 
+IronBlog.EntriesController = Ember.ArrayController.extend({
+  entriesCount: function(){
+    return this.get('model.length');
+  }.property('model.length')
+})
+
 // IronBlog.EntriesRoute = Ember.Route.extend({
 //   model: function(){
 //     return [{
