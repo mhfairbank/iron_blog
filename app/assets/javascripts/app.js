@@ -41,7 +41,10 @@ IronBlog.EntryController = Ember.ObjectController.extend({
 IronBlog.EntriesController = Ember.ArrayController.extend({
   entriesCount: function(){
     return this.get('model.length');
-  }.property('model.length')
+  }.property('model.length'),
+  recentEntry: function(){
+    return this.get('model').sortBy(['updatedAt']).get('lastObject')  
+  }.property('model.@each.updatedAt')
 })
 
 IronBlog.EntriesIndexController = Ember.ArrayController.extend({
@@ -71,6 +74,14 @@ IronBlog.EntriesIndexController = Ember.ArrayController.extend({
     }
   }
 })
+
+// IronBlog.EntriesController = Ember.ArrayController.extend({
+//   recentEntry: function(){
+//     return this.get('model').sortBy(['updatedAt']).get('lastObject')  
+//   }.property('model.@each.updatedAt')
+// })
+
+// IronBlog.RecentEntryController = Ember.ObjectController.extend
 
 
 
